@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 10 Sahabat Nabi ﷺ</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --gold: #f5c451;
+    --gold2: #ffe28a;
+    --green: #0b5d4b;
+    --green2: #0f8068;
+    --dark: #071d18;
+    --cream: #fff9e9;
+    --red: #ff5b5b;
+    --blue: #52c7ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(245,196,81,.12), transparent 25%),
+        radial-gradient(circle at 80% 80%, rgba(15,128,104,.18), transparent 30%),
+        linear-gradient(135deg, #041510, #0a3027 50%, #051c17);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .06;
+    background-image:
+        radial-gradient(circle, white 1px, transparent 1px);
+    background-size: 28px 28px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    text-align: center;
+    padding: 28px 15px 15px;
+}
+
+.arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(24px, 5vw, 42px);
+    color: var(--gold2);
+    text-shadow: 0 0 18px rgba(245,196,81,.45);
+    margin-bottom: 5px;
+}
+
+h1 {
+    font-size: clamp(23px, 5vw, 38px);
+    font-weight: 800;
+    background: linear-gradient(90deg, #fff, var(--gold2), #fff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    color: #b9d7ce;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* =========================
+   BERKAH AMMAR BANNER
+========================= */
+
+.berkah-ammar-banner {
+    margin-top: 15px;
+    padding: 12px 18px;
+    background: rgba(245, 196, 81, 0.12);
+    border: 1px solid rgba(245, 196, 81, 0.35);
+    border-radius: 12px;
+    display: inline-block;
+    max-width: 90%;
+    backdrop-filter: blur(8px);
+}
+
+.berkah-ammar-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--gold2);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.berkah-ammar-services {
+    font-size: 13px;
+    color: #e0f2ed;
+    line-height: 1.6;
+}
+
+.berkah-ammar-services span {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.berkah-ammar-services span::after {
+    content: " • ";
+    color: var(--gold);
+    margin-left: 8px;
+}
+
+.berkah-ammar-services span:last-child::after {
+    content: "";
+}
+
+/* =========================
+   GAME INFO
+========================= */
+
+.game-info {
+    max-width: 1000px;
+    margin: 18px auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.info-box {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 15px;
+    padding: 12px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.info-label {
+    font-size: 10px;
+    color: #9fc3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-value {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--gold2);
+}
+
+.combo {
+    transition: .25s;
+}
+
+.combo.active {
+    color: #ffb347;
+    text-shadow:
+        0 0 8px #ff8c00,
+        0 0 20px #ff6a00;
+    transform: scale(1.12);
+}
+
+/* =========================
+   GAME BOARD
+========================= */
+
+.game-container {
+    width: min(1000px, 94%);
+    margin: auto;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 13px;
+    perspective: 1200px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    aspect-ratio: 1 / 1.18;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: absolute;
+    inset: 0;
+    transition: transform .65s cubic-bezier(.2,.7,.2,1);
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+/* BACK */
+
+.card-back {
+    background:
+        radial-gradient(circle at center, rgba(245,196,81,.15), transparent 40%),
+        linear-gradient(145deg, #0e6c59, #063b30);
+    border: 2px solid rgba(245,196,81,.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        inset 0 0 25px rgba(255,255,255,.04),
+        0 8px 20px rgba(0,0,0,.3);
+}
+
+.card-back::before {
+    content: "﷽";
+    font-family: 'Amiri', serif;
+    font-size: 34px;
+    color: var(--gold2);
+    text-shadow: 0 0 15px rgba(245,196,81,.5);
+}
+
+.card-back::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(245,196,81,.3);
+    border-radius: 13px;
+}
+
+/* FRONT */
+
+.card-front {
+    transform: rotateY(180deg);
+    background:
+        linear-gradient(145deg, #fffdf4, #f7ecd0);
+    color: #17372f;
+    border: 2px solid var(--gold);
+    box-shadow:
+        0 0 0 rgba(245,196,81,0);
+}
+
+.card-symbol {
+    font-size: clamp(30px, 6vw, 48px);
+    margin-top: 15%;
+    text-align: center;
+    filter: drop-shadow(0 4px 5px rgba(0,0,0,.15));
+}
+
+.card-name {
+    text-align: center;
+    font-size: clamp(10px, 1.6vw, 14px);
+    font-weight: 800;
+    margin: 8px 4px;
+}
+
+.card-number {
+    position: absolute;
+    top: 7px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* GLOW */
+
+.card:hover .card-back {
+    box-shadow:
+        0 0 10px rgba(245,196,81,.25),
+        0 0 25px rgba(245,196,81,.15);
+}
+
+.card.matched .card-front {
+    animation: matchedGlow 1.5s infinite alternate;
+}
+
+@keyframes matchedGlow {
+    from {
+        box-shadow:
+            0 0 8px rgba(245,196,81,.4),
+            0 0 20px rgba(245,196,81,.2);
+    }
+    to {
+        box-shadow:
+            0 0 20px rgba(245,196,81,.8),
+            0 0 45px rgba(245,196,81,.45);
+    }
+}
+
+/* =========================
+   SHAKE
+========================= */
+
+.shake {
+    animation: shake .45s ease;
+}
+
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px) rotate(-2deg); }
+    40% { transform: translateX(8px) rotate(2deg); }
+    60% { transform: translateX(-6px) rotate(-1deg); }
+    80% { transform: translateX(6px) rotate(1deg); }
+}
+
+/* =========================
+   MATCH EFFECT
+========================= */
+
+.match-burst {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.spark {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold);
+    animation: burst 800ms ease-out forwards;
+}
+
+@keyframes burst {
+    from {
+        transform: translate(0,0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform:
+            translate(
+                calc((var(--x) - .5) * 250px),
+                calc((var(--y) - .5) * 250px)
+            )
+            scale(0);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto 30px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.control-btn {
+    padding: 11px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    color: #14372f;
+    background: linear-gradient(135deg, var(--gold2), var(--gold));
+    box-shadow: 0 5px 15px rgba(245,196,81,.2);
+    transition: .2s;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(245,196,81,.35);
+}
+
+.control-btn:active {
+    transform: scale(.95);
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    text-align: center;
+    min-height: 26px;
+    color: #b8ded4;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+    animation: fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-box {
+    width: min(500px, 95%);
+    background:
+        linear-gradient(145deg, #103f34, #06251e);
+    border: 1px solid rgba(245,196,81,.45);
+    border-radius: 25px;
+    padding: 30px 24px;
+    text-align: center;
+    box-shadow:
+        0 0 40px rgba(245,196,81,.2);
+    animation: modalPop .5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(.7) translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-symbol {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.modal h2 {
+    color: var(--gold2);
+    margin-bottom: 10px;
+}
+
+.modal-description {
+    color: #d5e8e2;
+    line-height: 1.7;
+    font-size: 13px;
+}
+
+.close-btn {
+    margin-top: 20px;
+    padding: 11px 25px;
+    border-radius: 12px;
+    background: var(--gold);
+    color: #14372f;
+    font-weight: 800;
+}
+
+/* =========================
+   WIN SCREEN
+========================= */
+
+.win-title {
+    font-family: 'Amiri', serif;
+    font-size: 35px;
+    color: var(--gold2);
+}
+
+.final-score {
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    margin: 8px;
+}
+
+.stars {
+    font-size: 30px;
+    margin: 10px 0;
+    letter-spacing: 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 750px) {
+    .board {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 9px;
+    }
+
+    .game-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-name {
+        font-size: 9px;
+    }
+
+    .card-symbol {
+        margin-top: 20%;
+    }
+}
+
+@media (max-width: 450px) {
+    .board {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+        border-radius: 13px;
+    }
+
+    .card-face {
+        border-radius: 13px;
+    }
+
+    .card-back::before {
+        font-size: 25px;
+    }
+
+    .card-symbol {
+        font-size: 28px;
+    }
+
+    .card-name {
+        font-size: 8px;
+    }
+
+    .game-info {
+        gap: 7px;
+    }
+
+    .info-box {
+        padding: 8px;
+    }
+
+    .berkah-ammar-services span {
+        display: block;
+        margin: 4px 0;
+    }
+
+    .berkah-ammar-services span::after {
+        content: "";
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="arabic">﷽</div>
+    <h1>Memory 10 Sahabat Nabi ﷺ</h1>
+    <p class="subtitle">
+        Temukan pasangan 10 Sahabat Nabi dan kenali kisah singkat mereka
+    </p>
+
+    <!-- TAMPILAN BERKAH AMMAR -->
+    <div class="berkah-ammar-banner">
+        <div class="berkah-ammar-title">Berkah Ammar</div>
+        <div class="berkah-ammar-services">
+            <span>Informasi Lebih lanjut hubungi Kami.</span>
+        </div>
+    </div>
+</header>
+
+<section class="game-info">
+
+    <div class="info-box">
+        <div class="info-label">⏱ Waktu</div>
+        <div class="info-value" id="timer">00:00</div>
+    </div>
+
+    <div class="info-box">
+        <div class="info-label">🏆 Skor</div>
+        <div class="info-value" id="score">0</div>
+    </div>
+
+    <div class="info-box">
+        <div class="info-label">🔥 Combo</div>
+        <div class="info-value combo" id="combo">x0</div>
+    </div>
+
+    <div class="info-box">
+        <div class="info-label">🎯 Pasangan</div>
+        <div class="info-value">
+            <span id="matched">0</span>/10
+        </div>
+    </div>
+
+</section>
+
+<div class="game-container">
+
+    <div class="message" id="message">
+        Temukan semua pasangan sahabat!
+    </div>
+
+    <div class="board" id="board"></div>
+
+    <div class="controls">
+        <button class="control-btn" onclick="restartGame()">
+            🔄 Mulai Ulang
+        </button>
+
+        <button class="control-btn" onclick="toggleSound()">
+            🔊 <span id="soundText">Suara ON</span>
+        </button>
+    </div>
+
+</div>
+
+
+<!-- MODAL INFO SAHABAT -->
+
+<div class="modal" id="infoModal">
+    <div class="modal-box">
+
+        <div class="modal-symbol" id="modalSymbol">🌙</div>
+
+        <h2 id="modalName"></h2>
+
+        <p class="modal-description" id="modalDescription"></p>
+
+        <button class="close-btn" onclick="closeInfo()">
+            Lanjutkan Permainan
+        </button>
+
+    </div>
+</div>
+
+
+<!-- WIN MODAL -->
+
+<div class="modal" id="winModal">
+
+    <div class="modal-box">
+
+        <div class="modal-symbol">🏆</div>
+
+        <div class="win-title">
+            MasyaAllah!
+        </div>
+
+        <p>
+            Semua pasangan berhasil ditemukan.
+        </p>
+
+        <div class="stars" id="stars">
+            ⭐⭐⭐
+        </div>
+
+        <div class="final-score" id="finalScore">
+            0
+        </div>
+
+        <p id="finalMessage">
+            Hebat! Kamu berhasil menyelesaikan Memory Sahabat Nabi ﷺ.
+        </p>
+
+        <button class="close-btn" onclick="restartGame(); closeWin();">
+            🔄 Main Lagi
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATA 10 SAHABAT
+===================================================== */
+
+const companions = [
+
+    {
+        id: 1,
+        name: "Abu Bakar Ash-Shiddiq RA",
+        symbol: "🌙",
+        description:
+        "Abu Bakar Ash-Shiddiq RA adalah sahabat dekat Rasulullah ﷺ dan khalifah pertama setelah beliau wafat. Beliau dikenal sangat jujur, lembut, dermawan, serta menjadi salah satu sahabat yang paling utama."
+    },
+
+    {
+        id: 2,
+        name: "Umar bin Khattab RA",
+        symbol: "⚔️",
+        description:
+        "Umar bin Khattab RA adalah khalifah kedua. Beliau terkenal dengan keberanian, ketegasan dan keadilannya. Pada masa kepemimpinannya, wilayah kaum Muslimin berkembang sangat luas."
+    },
+
+    {
+        id: 3,
+        name: "Utsman bin Affan RA",
+        symbol: "📖",
+        description:
+        "Utsman bin Affan RA adalah khalifah ketiga. Beliau dikenal sangat pemalu dan dermawan. Salah satu jasa besarnya adalah membantu standarisasi mushaf Al-Qur'an."
+    },
+
+    {
+        id: 4,
+        name: "Ali bin Abi Thalib RA",
+        symbol: "🛡️",
+        description:
+        "Ali bin Abi Thalib RA adalah sepupu sekaligus menantu Rasulullah ﷺ dan khalifah keempat. Beliau dikenal sebagai sosok pemberani, berilmu dan memiliki kedudukan istimewa di kalangan para sahabat."
+    },
+
+    {
+        id: 5,
+        name: "Abdurrahman bin Auf RA",
+        symbol: "💰",
+        description:
+        "Abdurrahman bin Auf RA adalah sahabat yang kaya namun sangat dermawan. Beliau termasuk sahabat yang dijanjikan masuk surga dan banyak menginfakkan hartanya di jalan Allah."
+    },
+
+    {
+        id: 6,
+        name: "Sa'ad bin Abi Waqqash RA",
+        symbol: "🏹",
+        description:
+        "Sa'ad bin Abi Waqqash RA merupakan salah satu sahabat awal masuk Islam. Beliau dikenal sebagai pemanah ulung dan termasuk sahabat yang memiliki keutamaan besar."
+    },
+
+    {
+        id: 7,
+        name: "Zubair bin Awwam RA",
+        symbol: "⚔️",
+        description:
+        "Zubair bin Awwam RA adalah sepupu Rasulullah ﷺ dan dikenal dengan gelar Hawari Rasulullah ﷺ, yaitu pembela setia beliau. Beliau terkenal pemberani dalam berbagai perjuangan."
+    },
+
+    {
+        id: 8,
+        name: "Talhah bin Ubaidillah RA",
+        symbol: "🛡️",
+        description:
+        "Talhah bin Ubaidillah RA adalah sahabat yang terkenal karena keberaniannya melindungi Rasulullah ﷺ dalam Perang Uhud. Beliau termasuk Al-'Asharah Al-Mubashsharah."
+    },
+
+    {
+        id: 9,
+        name: "Abu Ubaidah bin Al-Jarrah RA",
+        symbol: "🗡️",
+        description:
+        "Abu Ubaidah bin Al-Jarrah RA dikenal dengan gelar Aminul Ummah, yaitu orang kepercayaan umat. Beliau terkenal amanah, sederhana dan memiliki kepemimpinan yang kuat."
+    },
+
+    {
+        id: 10,
+        name: "Sa'id bin Zaid RA",
+        symbol: "🌿",
+        description:
+        "Sa'id bin Zaid RA adalah salah satu sahabat yang dijanjikan surga. Beliau termasuk generasi awal yang memeluk Islam dan dikenal memiliki keteguhan iman serta keberanian."
+    }
+
+];
+
+
+/* =====================================================
+   GAME VARIABLES
+===================================================== */
+
+let cards = [];
+let flippedCards = [];
+let lockBoard = false;
+
+let score = 0;
+let combo = 0;
+let matchedPairs = 0;
+
+let seconds = 0;
+let timerInterval = null;
+let gameStarted = false;
+
+let soundEnabled = true;
+
+
+/* =====================================================
+   AUDIO SYSTEM
+===================================================== */
+
+let audioCtx = null;
+
+function getAudio() {
+
+    if (!audioCtx) {
+        audioCtx = new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+    }
+
+    return audioCtx;
+}
+
+
+function playTone(
+    frequency,
+    duration = .12,
+    type = "sine",
+    volume = .08
+) {
+
+    if (!soundEnabled) return;
+
+    const ctx = getAudio();
+
+    const oscillator = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    oscillator.type = type;
+    oscillator.frequency.value = frequency;
+
+    gain.gain.setValueAtTime(volume, ctx.currentTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+        ctx.currentTime + duration
+    );
+}
+
+
+/* =====================================================
+   SOUNDS
+===================================================== */
+
+function soundFlip() {
+    playTone(420, .08, "sine", .05);
+}
+
+function soundWrong() {
+
+    playTone(150, .15, "sawtooth", .08);
+
+    setTimeout(() => {
+        playTone(100, .18, "sawtooth", .05);
+    }, 80);
+
+}
+
+function soundMatch() {
+
+    playTone(520, .12, "sine", .06);
+
+    setTimeout(() => {
+        playTone(700, .15, "sine", .07);
+    }, 100);
+
+    setTimeout(() => {
+        playTone(900, .2, "sine", .06);
+    }, 200);
+
+}
+
+function soundCombo() {
+
+    playTone(700, .08, "triangle", .06);
+
+    setTimeout(() => {
+        playTone(950, .1, "triangle", .07);
+    }, 80);
+
+}
+
+function soundWin() {
+
+    const notes = [
+        523,
+        659,
+        784,
+        1046
+    ];
+
+    notes.forEach((note, index) => {
+
+        setTimeout(() => {
+            playTone(
+                note,
+                .25,
+                "sine",
+                .08
+            );
+        }, index * 150);
+
+    });
+
+}
+
+
+/* =====================================================
+   INIT GAME
+===================================================== */
+
+function initGame() {
+
+    clearInterval(timerInterval);
+
+    score = 0;
+    combo = 0;
+    matchedPairs = 0;
+    seconds = 0;
+
+    flippedCards = [];
+    lockBoard = false;
+    gameStarted = false;
+
+    updateUI();
+
+    document.getElementById("message").textContent =
+        "Temukan semua pasangan sahabat!";
+
+    const duplicated = [
+        ...companions,
+        ...companions
+    ];
+
+    cards = shuffle(duplicated);
+
+    const board =
+        document.getElementById("board");
+
+    board.innerHTML = "";
+
+    cards.forEach((person, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "card";
+
+        card.dataset.id = person.id;
+
+        card.innerHTML = `
+
+            <div class="card-inner">
+
+                <div class="card-face card-back"></div>
+
+                <div class="card-face card-front">
+
+                    <div class="card-number">
+                        ${index + 1}
+                    </div>
+
+                    <div class="card-symbol">
+                        ${person.symbol}
+                    </div>
+
+                    <div class="card-name">
+                        ${person.name}
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+        card.addEventListener(
+            "click",
+            () => flipCard(card, person)
+        );
+
+        board.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array) {
+
+    const arr = [...array];
+
+    for (
+        let i = arr.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            arr[i],
+            arr[j]
+        ] =
+        [
+            arr[j],
+            arr[i]
+        ];
+
+    }
+
+    return arr;
+}
+
+
+/* =====================================================
+   FLIP CARD
+===================================================== */
+
+function flipCard(card, person) {
+
+    if (
+        lockBoard ||
+        card.classList.contains("flipped") ||
+        card.classList.contains("matched")
+    ) {
+        return;
+    }
+
+    if (!gameStarted) {
+        startTimer();
+        gameStarted = true;
+    }
+
+    soundFlip();
+
+    card.classList.add("flipped");
+
+    flippedCards.push({
+        card,
+        person
+    });
+
+    if (flippedCards.length === 2) {
+
+        checkMatch();
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECK MATCH
+===================================================== */
+
+function checkMatch() {
+
+    lockBoard = true;
+
+    const first = flippedCards[0];
+    const second = flippedCards[1];
+
+    if (
+        first.person.id ===
+        second.person.id
+    ) {
+
+        handleMatch(
+            first.card,
+            second.card,
+            first.person
+        );
+
+    } else {
+
+        handleWrong(
+            first.card,
+            second.card
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MATCH
+===================================================== */
+
+function handleMatch(
+    card1,
+    card2,
+    person
+) {
+
+    setTimeout(() => {
+
+        card1.classList.add("matched");
+        card2.classList.add("matched");
+
+        matchedPairs++;
+
+        combo++;
+
+        let comboBonus =
+            combo > 1
+            ? combo * 25
+            : 0;
+
+        score +=
+            100 + comboBonus;
+
+        soundMatch();
+
+        if (combo >= 2) {
+            soundCombo();
+        }
+
+        createMatchBurst(
+            card1
+        );
+
+        updateUI();
+
+        showInfo(person);
+
+        flippedCards = [];
+
+        lockBoard = false;
+
+        if (matchedPairs === 10) {
+
+            setTimeout(
+                finishGame,
+                700
+            );
+
+        }
+
+    }, 400);
+
+}
+
+
+/* =====================================================
+   WRONG
+===================================================== */
+
+function handleWrong(
+    card1,
+    card2
+) {
+
+    combo = 0;
+
+    score =
+        Math.max(
+            0,
+            score - 10
+        );
+
+    soundWrong();
+
+    card1.classList.add("shake");
+    card2.classList.add("shake");
+
+    document.getElementById("message")
+        .textContent =
+        "Belum cocok 😅 Coba lagi!";
+
+    updateUI();
+
+    setTimeout(() => {
+
+        card1.classList.remove("flipped");
+        card2.classList.remove("flipped");
+
+        card1.classList.remove("shake");
+        card2.classList.remove("shake");
+
+        flippedCards = [];
+
+        lockBoard = false;
+
+    }, 850);
+
+}
+
+
+/* =====================================================
+   MATCH BURST
+===================================================== */
+
+function createMatchBurst(card) {
+
+    const rect =
+        card.getBoundingClientRect();
+
+    const burst =
+        document.createElement("div");
+
+    burst.className = "match-burst";
+
+    burst.style.left =
+        rect.left +
+        rect.width / 2 +
+        "px";
+
+    burst.style.top =
+        rect.top +
+        rect.height / 2 +
+        "px";
+
+    for (
+        let i = 0;
+        i < 24;
+        i++
+    ) {
+
+        const spark =
+            document.createElement("span");
+
+        spark.className = "spark";
+
+        spark.style.setProperty(
+            "--x",
+            Math.random()
+        );
+
+        spark.style.setProperty(
+            "--y",
+            Math.random()
+        );
+
+        spark.style.animationDelay =
+            Math.random() * .15 +
+            "s";
+
+        burst.appendChild(spark);
+
+    }
+
+    document.body.appendChild(burst);
+
+    setTimeout(() => {
+        burst.remove();
+    }, 1000);
+
+}
+
+
+/* =====================================================
+   INFO MODAL
+===================================================== */
+
+function showInfo(person) {
+
+    document.getElementById("modalSymbol")
+        .textContent =
+        person.symbol;
+
+    document.getElementById("modalName")
+        .textContent =
+        person.name;
+
+    document.getElementById("modalDescription")
+        .textContent =
+        person.description;
+
+    document
+        .getElementById("infoModal")
+        .classList.add("show");
+
+}
+
+function closeInfo() {
+
+    document
+        .getElementById("infoModal")
+        .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function startTimer() {
+
+    timerInterval =
+        setInterval(() => {
+
+            seconds++;
+
+            updateTimer();
+
+        }, 1000);
+
+}
+
+function updateTimer() {
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+    const secs =
+        seconds % 60;
+
+    document.getElementById("timer")
+        .textContent =
+        String(minutes).padStart(2, "0")
+        + ":" +
+        String(secs).padStart(2, "0");
+
+}
+
+
+/* =====================================================
+   UI
+===================================================== */
+
+function updateUI() {
+
+    document.getElementById("score")
+        .textContent =
+        score;
+
+    document.getElementById("combo")
+        .textContent =
+        "x" + combo;
+
+    document.getElementById("matched")
+        .textContent =
+        matchedPairs;
+
+    document.getElementById("combo")
+        .classList.toggle(
+            "active",
+            combo >= 2
+        );
+
+    updateTimer();
+
+}
+
+
+/* =====================================================
+   WIN
+===================================================== */
+
+function finishGame() {
+
+    clearInterval(timerInterval);
+
+    soundWin();
+
+    let stars = 1;
+
+    if (score >= 1400) {
+        stars = 3;
+    } else if (score >= 900) {
+        stars = 2;
+    }
+
+    document.getElementById("stars")
+        .textContent =
+        "⭐".repeat(stars);
+
+    document.getElementById("finalScore")
+        .textContent =
+        score + " Poin";
+
+    let message = "";
+
+    if (stars === 3) {
+
+        message =
+            "MasyaAllah! Luar biasa! Kamu sangat cepat menemukan semua pasangan.";
+
+    } else if (stars === 2) {
+
+        message =
+            "MasyaAllah! Permainan selesai dengan baik. Terus belajar mengenal para sahabat Rasulullah ﷺ.";
+
+    } else {
+
+        message =
+            "Alhamdulillah, semua pasangan berhasil ditemukan. Yuk, kenali lebih banyak kisah para sahabat!";
+
+    }
+
+    document.getElementById("finalMessage")
+        .textContent =
+        message;
+
+    document
+        .getElementById("winModal")
+        .classList.add("show");
+
+}
+
+
+function closeWin() {
+
+    document
+        .getElementById("winModal")
+        .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restartGame() {
+
+    closeInfo();
+    closeWin();
+
+    initGame();
+
+}
+
+
+/* =====================================================
+   SOUND TOGGLE
+===================================================== */
+
+function toggleSound() {
+
+    soundEnabled =
+        !soundEnabled;
+
+    document.getElementById("soundText")
+        .textContent =
+        soundEnabled
+        ? "Suara ON"
+        : "Suara OFF";
+
+    if (soundEnabled) {
+        playTone(600, .12);
+    }
+
+}
+
+
+/* =====================================================
+   KEYBOARD SUPPORT
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Escape") {
+
+            closeInfo();
+            closeWin();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+initGame();
+
+</script>
+
+</body>
+</html>
